@@ -1,8 +1,15 @@
 #include <iostream>
 #include "Application.h"
 
-int main() {
+int main()
+{
     Application app;
-    app.startApp();
+    char ch;
+    do
+    {
+        app.startApp();
+        std::cout << "\n\nDo you want to continue(Y/n) : ";
+        std::cin >> ch;
+    } while (ch == 'Y' || ch == 'y');
     return 0;
 }

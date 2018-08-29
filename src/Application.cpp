@@ -54,6 +54,7 @@ int Application::getEncryptionId()
 	std::cout << "4 - Transpose" << std::endl;
 	std::cout << "5 - Xor (Exclusive or)" << std::endl;
 	std::cout << "6 - Vigenere " << std::endl;
+	std::cout << "7 - Stream" << std::endl;
 	std::cout << "Enter type : ";
 	std::cin >> type;
 	return (type < 1 || type > 7) ? -1 : type;
@@ -64,7 +65,7 @@ void Application::showMessage(int type, std::string &message)
 	if (message != "NULL")
 	{
 		if (type == 2)
-			std::cout << "Decrypted Version:\n";
+			std::cout << "Decrypted Version:";
 		else
 			std::cout << "Encrypted Version:\n";
 		std::cout << message;
@@ -235,12 +236,6 @@ void Application::startApp()
 		showMessage(type, processed);
 		char ch;
 		std::cout << std::endl;
-		std::cout << "Do you want to decrypt the same? ";
-		std::cin >> ch;
-		if (ch == 'y' || ch == 'Y')
-		{
-			showMessage(2, processDecrypt(processed));
-		}
 		std::cout << "\nDo you want to save ";
 		if (type == 1)
 		{
