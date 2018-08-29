@@ -170,31 +170,31 @@ std::string &Application::processDecrypt(std::string &message)
 int Application::getDecryptionId(std::string &message)
 {
 	std::string type = message.substr(message.size() - 3, 3);
-	if (type == "0x0")
+	if (type.compare(std::string("0x0")))
 	{
 		return 1;
 	}
-	else if (type == "1x1")
+	else if (type.compare(std::string("1x1")))
 	{
 		return 2;
 	}
-	else if (type == "2x2")
+	else if (type.compare(std::string("2x2")))
 	{
 		return 3;
 	}
-	else if (type == "3x3")
+	else if (type.compare(std::string("3x3")))
 	{
 		return 4;
 	}
-	else if (type == "4x4")
+	else if (type.compare(std::string("4x4")))
 	{
 		return 5;
 	}
-	else if (type == "5x5")
+	else if (type.compare(std::string("5x5")))
 	{
 		return 6;
 	}
-	else if (type == "6x6")
+	else if (type.compare(std::string("6x6")))
 	{
 		return 7;
 	}

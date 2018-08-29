@@ -9,7 +9,7 @@ std::string * CaesarCipherEncryption::encrypt(std::string &message)
 	std::string * encrypt = new std::string;
 	for (char& letter : message) 
 	{
-			*encrypt += letter + 5;
+			*encrypt += static_cast<char>(letter + 5);
 	}
 	encrypt->append(getEncryptionKey());
 	return encrypt;
@@ -20,7 +20,7 @@ std::string * CaesarCipherEncryption::decrypt(std::string &message)
 	std::string * decrypt = new std::string;
 	for (char& letter : message) 
 	{
-			*decrypt += letter - 5;
+			*decrypt += static_cast<char>(letter - 5);
 	}
 	return decrypt;
 }

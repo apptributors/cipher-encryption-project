@@ -17,7 +17,7 @@ std::string *BlockCipherEncryption::encrypt(std::string &message)
 		{
 			idx = 0;
 		}
-		*encrypt += (letter ^ *(mkey + idx)) - *(mkey + idx);
+		*encrypt += static_cast<char>((letter ^ *(mkey + idx)) - *(mkey + idx));
 		idx++;
 	}
 	encrypt->append(getEncryptionKey());
@@ -35,7 +35,7 @@ std::string *BlockCipherEncryption::decrypt(std::string &cipher)
 		{
 			idx = 0;
 		}
-		*decrypt += (letter + *(mkey + idx)) ^ *(mkey + idx);
+		*decrypt += static_cast<char>((letter + *(mkey + idx)) ^ *(mkey + idx));
 		idx++;
 	}
 	return decrypt;

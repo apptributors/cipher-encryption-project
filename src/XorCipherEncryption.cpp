@@ -15,7 +15,7 @@ std::string *XorCipherEncryption::encrypt(std::string &message)
 	std::string *output = new std::string;
 	for (char &letter : message)
 	{
-		*output += letter ^ key;
+		*output += static_cast<char>(letter ^ key);
 	}
 	output->append(getEncryptionKey());
 	return output;
@@ -26,7 +26,7 @@ std::string *XorCipherEncryption::decrypt(std::string &cipher)
 	std::string *output = new std::string;
 	for (char &letter : cipher)
 	{
-		*output += letter ^ key;
+		*output += static_cast<char>(letter ^ key);
 	}
 	return output;
 }

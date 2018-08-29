@@ -21,7 +21,7 @@ std::string *TransposeCipherEncryption::encrypt(std::string &message)
             }
             else
             {
-                *output += message[position];
+                *output += static_cast<char>(message[position]);
             }
         }
     }
@@ -39,7 +39,7 @@ std::string *TransposeCipherEncryption::decrypt(std::string &cipher)
         for (int j = 0; j < blockSize; j++)
         {
             int position = i + j * blockSize;
-            char letter = cipher[position];
+            char letter = static_cast<char>(cipher[position]);
             if (letter != 1)
             {
                 *output += letter;
