@@ -1,10 +1,10 @@
 # Ignore the build and lib dirs
 build
 lib/*
-.vscode
+.vscode 
 
 # Ignore any executables
-bin/*
+bin
 
 # Prerequisites
 *.d
