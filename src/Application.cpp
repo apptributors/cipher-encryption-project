@@ -78,6 +78,7 @@ void Application::showMessage(int type, std::string &message)
 
 void Application::saveToFile(std::string &message)
 {
+	std::cin.ignore();
 	FileHandler *file = new FileHandler;
 	std::string filedir;
 	std::cout << "\nEnter file directory: ";
