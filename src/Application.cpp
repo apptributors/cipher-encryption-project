@@ -27,7 +27,7 @@ std::string &Application::getMessage()
 		file = new FileHandler;
 		std::string filedir;
 		std::cout << "\nEnter file directory : ";
-		getline(std::cin, filedir, '\n');
+		std::cin >> filedir;
 		std::string *content = file->readFromFile(filedir);
 		delete file;
 		return *content;
