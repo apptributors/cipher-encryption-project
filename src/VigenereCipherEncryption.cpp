@@ -76,9 +76,11 @@ char VigenereCipherEncryption::decodeKeyValue(char value)
 std::string *VigenereCipherEncryption::encrypt(std::string &message)
 {
 	std::string *output = new std::string;
+	char value = 0;
 	for (char &letter : message)
 	{
-		*output += encodeKeyValue(letter);
+		value = encodeKeyValue(letter);
+		output->push_back(value);
 	}
 	output->append(getEncryptionKey());
 	return output;
@@ -87,9 +89,11 @@ std::string *VigenereCipherEncryption::encrypt(std::string &message)
 std::string *VigenereCipherEncryption::decrypt(std::string &cipher)
 {
 	std::string *output = new std::string;
+	char value = 0;
 	for (char &letter : cipher)
 	{
-		*output += decodeKeyValue(letter);
+		value = decodeKeyValue(letter);
+		output->push_back(value);
 	}
 	return output;
 }

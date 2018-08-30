@@ -7,21 +7,21 @@ std::string BitwiseCipherEncryption::getEncryptionKey()
 
 std::string *BitwiseCipherEncryption::encrypt(std::string &message)
 {
-	std::string *encrypt = new std::string;
+	std::string *output = new std::string;
 	for (char &letter : message)
 	{
-		*encrypt += static_cast<char>(~letter);
+		output->push_back(~letter);
 	}
-	encrypt->append(getEncryptionKey());
-	return encrypt;
+	output->append(getEncryptionKey());
+	return output
 }
 
 std::string *BitwiseCipherEncryption::decrypt(std::string &cipher)
 {
-	std::string *decrypt = new std::string;
+	std::string *output = new std::string;
 	for (char &letter : cipher)
 	{
-		*decrypt += static_cast<char>(~letter);
+		output->push_back(~letter);
 	}
-	return decrypt;
+	return output;
 }

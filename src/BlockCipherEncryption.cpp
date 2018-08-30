@@ -8,7 +8,7 @@ std::string BlockCipherEncryption::getEncryptionKey() {
 
 std::string *BlockCipherEncryption::encrypt(std::string &message)
 {
-	std::string *encrypt = new std::string;
+	std::string *output = new std::string;
 	const char *mkey = key.c_str();
 	int idx = 0;
 	for (char &letter : message)
@@ -17,16 +17,17 @@ std::string *BlockCipherEncryption::encrypt(std::string &message)
 		{
 			idx = 0;
 		}
-		*encrypt += static_cast<char>((letter ^ *(mkey + idx)) - *(mkey + idx));
+		char encodedValue = (letter ^ *(mkey + idx)) - *(mkey + idx);
+		output->push_back(encodedValue);
 		idx++;
 	}
-	encrypt->append(getEncryptionKey());
-	return encrypt;
+	output->append(getEncryptionKey());
+	return output;
 }
 
 std::string *BlockCipherEncryption::decrypt(std::string &cipher)
 {
-	std::string *decrypt = new std::string;
+	std::string *output = new std::string;
 	const char *mkey = key.c_str();
 	int idx = 0;
 	for (char &letter : cipher)
@@ -35,8 +36,9 @@ std::string *BlockCipherEncryption::decrypt(std::string &cipher)
 		{
 			idx = 0;
 		}
-		*decrypt += static_cast<char>((letter + *(mkey + idx)) ^ *(mkey + idx));
+		char decodeValue = (letter + *(mkey + idx)) ^ *(mkey + idx);
+		output->push_back(decodeValue);
 		idx++;
 	}
-	return decrypt;
+	return output;
 }

@@ -9,6 +9,7 @@ std::string *TransposeCipherEncryption::encrypt(std::string &message)
 {
     std::string *output = new std::string;
     const int SIZE = message.size();
+    char letter = 0;
     int blockSize = static_cast<int>(sqrt(SIZE)) + 1;
     for (int i = 0; i < blockSize; i++)
     {
@@ -17,12 +18,13 @@ std::string *TransposeCipherEncryption::encrypt(std::string &message)
             int position = i + (j * blockSize);
             if (position > SIZE)
             {
-                *output += static_cast<char>(1);
+                letter = 1;
             }
             else
             {
-                *output += static_cast<char>(message[position]);
+                letter = message[position];
             }
+            output->push_back(letter);
         }
     }
     output->append(getEncryptionKey());
@@ -42,7 +44,7 @@ std::string *TransposeCipherEncryption::decrypt(std::string &cipher)
             char letter = static_cast<char>(cipher[position]);
             if (letter != 1)
             {
-                *output += letter;
+                output->push_back(letter);
             }
         }
     }
