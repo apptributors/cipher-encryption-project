@@ -13,7 +13,7 @@ std::string *BitwiseCipherEncryption::encrypt(std::string &message)
 		output->push_back(~letter);
 	}
 	output->append(getEncryptionKey());
-	return output
+	return output;
 }
 
 std::string *BitwiseCipherEncryption::decrypt(std::string &cipher)

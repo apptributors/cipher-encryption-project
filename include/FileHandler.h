@@ -6,7 +6,7 @@
 class FileHandler
 {
 public:
-	void writeToFile(std::string &, std::string &);
+	void writeToFile(std::string &, std::string *);
 	std::string *readFromFile(std::string &);
 };
 

@@ -1,7 +1,16 @@
 #include <iostream>
+#include "Application.h"
 
 int main()
 {
-    std::cout << "\033[1;31mbold red text\033[0m\n";
+    Application *app = new Application();
+    char choice;
+    do {
+        app->startApp();
+        std::cout << "\n\nDo you want to continue(Y/n)? ";
+        std::cin >> choice;
+        std::cout << std::endl;
+    } while (choice == 'Y' || choice == 'y');
+    delete app;
     return 0;
 }
