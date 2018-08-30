@@ -74,8 +74,7 @@ void printcnt(char content)
 {
     int length = 1;
     int position = static_cast<int>((80 - length) / 2);
-    for (int i = 0; i < position; i++)
-        std::cout << " ";
+    std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
@@ -83,8 +82,7 @@ void printcnt(int content)
 {
     int length = std::to_string(content).size();
     int position = static_cast<int>((80 - length) / 2);
-    for (int i = 0; i < position; i++)
-        std::cout << " ";
+    std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
@@ -92,8 +90,7 @@ void printcnt(float content)
 {
     int length = std::to_string(content).size();
     int position = static_cast<int>((80 - length) / 2);
-    for (int i = 0; i < position; i++)
-        std::cout << " ";
+    std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
@@ -101,8 +98,7 @@ void printcnt(double content)
 {
     int length = std::to_string(content).size();
     int position = static_cast<int>((80 - length) / 2);
-    for (int i = 0; i < position; i++)
-        std::cout << " ";
+    std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
@@ -110,8 +106,7 @@ void printcnt(std::string &content)
 {
     int length = content.size();
     int position = static_cast<int>((80 - length) / 2);
-    for (int i = 0; i < position; i++)
-        std::cout << " ";
+    std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
@@ -119,8 +114,7 @@ void printcnt(const char *content)
 {
     int length = strlen(content);
     int position = static_cast<int>((80 - length) / 2);
-    for (int i = 0; i < position; i++)
-        std::cout << " ";
+    std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
@@ -128,8 +122,7 @@ void printcnt(const std::string *content)
 {
     int length = content->size();
     int position = static_cast<int>((80 - length) / 2);
-    for (int i = 0; i < position; i++)
-        std::cout << " ";
+    std::cout << std::string(position - 1, ' ');
     println(content);
 }
 

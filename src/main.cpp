@@ -1,8 +1,16 @@
 #include <iostream>
 #include "Application.h"
+#include "Utils.h"
 
 int main()
 {
+    for (int i = 0; i < 80; i++)
+        std::cout << '-';
+    std::cout << std::endl;
+    printcnt("Cipher Encryption Project");
+    for (int i = 0; i < 80; i++)
+        std::cout << '-';
+    std::cout << std::endl;
     Application *app = new Application();
     char choice;
     do {
