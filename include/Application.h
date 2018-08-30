@@ -1,8 +1,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
-#include <string>
-#include <iostream>
 #include <cstdlib>
+#include <iostream>
+#include <string>
 
 #include "CipherEncryption.h"
 #include "BitwiseCipherEncryption.h"

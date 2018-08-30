@@ -83,7 +83,7 @@ void Application::saveToFile(std::string &message)
 	std::string filedir;
 	std::cout << "\nEnter file directory: ";
 	getline(std::cin, filedir, '\n');
-	file->writeToFile(filedir, message);
+	file->writeToFile(filedir, &message);
 	std::cout << "\nFile saved.";
 	delete file;
 }

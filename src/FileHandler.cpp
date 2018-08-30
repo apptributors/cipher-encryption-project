@@ -1,9 +1,9 @@
 #include "FileHandler.h"
 
-void FileHandler::writeToFile(std::string &filedir, std::string &content)
+void FileHandler::writeToFile(std::string &filedir, std::string *content)
 {
 	std::ofstream out(filedir, std::ofstream::out);
-	out << content;
+	out << *content;
 	out.close();
 }
 

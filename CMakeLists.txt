@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(Cipher-Encryption-Project VERSION 1.0.0)
+project(Cipher-Encryption-Project VERSION 1.1.0)
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(include)
 
 include(CTest)
 enable_testing()
 
-set(UNIX_EXE_NAME "${PROJECT_NAME}_${PROJECT_VERSION}")
-set(WIN_EXE_NAME "${UNIX_EXE_NAME}.exe")
+set(UNIX_EXE_NAME "${PROJECT_NAME}.out")
+set(WIN_EXE_NAME "${PROJECT_NAME}.exe")
 
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 
