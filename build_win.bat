@@ -1,3 +1,2 @@
-@cmake.exe -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -H. -B build
-@cmake.exe --build build --target ../bin/Cipher-Encryption-Project.exe
-"./bin/Cipher-Encryption-Project.exe"
+@cmake.exe -G "MinGW Makefiles" -H. -Bbuild
+@cmake.exe --build build --t -j3

@@ -3,6 +3,15 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include <sstream>
+
+//Constants
+#define SCREEN_WIDTH 80
+#ifdef _WIN32
+#define CLEAR "cls"
+#else //In any other OS
+#define CLEAR "clear"
+#endif
 
 void print(char);
 void print(int);
@@ -35,5 +44,20 @@ bool areTheSame(double, double);
 bool areTheSame(std::string &, std::string &);
 bool areTheSame(char *, char *);
 bool areTheSame(std::string *, std::string *);
+
+
+bool isWithInTheRange(char, char, char);
+bool isWithInTheRange(int, int, int);
+bool isWithInTheRange(float, float, float);
+bool isWithInTheRange(double, double, double);
+
+template<typename T>
+std::string toString(T);
+
+void clearScreen();
+
+void printHeading(std::string &, std::string &);
+void printNextLine();
+void printLines(int);
 
 #endif

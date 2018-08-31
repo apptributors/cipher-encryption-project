@@ -1,24 +1,16 @@
 #include <iostream>
+#include <string>
 #include "Application.h"
 #include "Utils.h"
 
 int main()
 {
-    for (int i = 0; i < 80; i++)
-        std::cout << '-';
-    std::cout << std::endl;
-    printcnt("Cipher Encryption Project");
-    for (int i = 0; i < 80; i++)
-        std::cout << '-';
+    std::string projectTitle = "Cipher Encryption";
+    std::string decoration(projectTitle.size(), '*');
+    printHeading(projectTitle, decoration);
     std::cout << std::endl;
     Application *app = new Application();
-    char choice;
-    do {
-        app->startApp();
-        std::cout << "\n\nDo you want to continue(Y/n)? ";
-        std::cin >> choice;
-        std::cout << std::endl;
-    } while (choice == 'Y' || choice == 'y');
+    app->runApp();
     delete app;
     return 0;
 }
