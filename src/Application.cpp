@@ -30,6 +30,42 @@ int Application::getInputChoice() {
 	return 0;
 }
 
+std::string *Application::getInputInfo() {
+	showInputOptions();
+	int inputForm = getInputChoice();
+	while (inputForm == 0) {
+		printNextLine();
+		println("Try to give input from the available options.");
+		printNextLine();
+		showInputOptions();
+		inputForm = getInputChoice();
+	}
+	std::string *input;
+	if (inputForm == 1) {
+		input = new std::string;
+		printNextLine();
+		println("Please end your message with a backtick symbol (`) ");
+		std::getline(std::cin, *input, '`');
+	} else {
+		std::string filedir = getFileInfo();
+		FileHandler file;
+		input = file.readFromFile(filedir);
+	}
+	return input;
+}
+
+std::string Application::getFileInfo() {
+	std::string filedir, filename;
+	std::cin.ignore();
+	print("Where do you want to save the file at ? ");
+	std::getline(std::cin, filedir, '\n');
+	print("What should be the file name ? ");
+	std::getline(std::cin, filename, '\n');
+	filedir.push_back('\\');
+	filedir.append(filename);
+	return filedir;
+}
+
 void Application::showEncryptionOptions() {
 	println("Types of ciphers available : ");
 	println("1 > Bitwise");
@@ -54,6 +90,23 @@ void Application::showInputOptions() {
 	println("2 > Retrieve it from a existing file");
 }
 
+void Application::showEncryptedMessage(std::string *message) {
+	println("Here is your encrypted message : ");
+	println(message);
+}
+
+void showDecryptedCipher(std::string *message) {
+	// TODO : Yet to implement this
+}
+
+void Application::saveInfoToFile(std::string *content) {
+	std::string filedir = getFileInfo();
+	FileHandler file;
+	file.writeToFile(filedir, content);
+	print("Happy to inform you that file is saved at ");
+	println(filedir);
+}
+
 void Application::manageEncryption() {
 	showEncryptionOptions();
 	int encryptionChoice = getEncryptionChoice();
@@ -64,6 +117,56 @@ void Application::manageEncryption() {
 		showEncryptionOptions();
 		encryptionChoice = getEncryptionChoice();
 	}
+	printNextLine();
+	std::string *message = getInputInfo();
+	CipherEncryption *cipher;
+	switch (encryptionChoice) {
+		case 1:
+			cipher = new BitwiseCipherEncryption;
+			break;
+		case 2: {
+			std::string key = "<&Programming is real fun&/>";
+			cipher = new BlockCipherEncryption(key);
+			break;
+		}
+		case 3:
+			cipher = new CaesarCipherEncryption;
+			break;
+		case 4:
+			cipher = new StreamCipherEncryption;
+			break;
+		case 5:
+			cipher = new TransposeCipherEncryption;
+			break;
+		case 6:
+			cipher = new VigenereCipherEncryption;
+			break;
+		default: {
+			char key = static_cast<char>(27); 
+			cipher = new XorCipherEncryption(key);
+		}
+	}
+	std::string *encrypted = cipher->encrypt(*message);
+	printNextLine();
+	char seeEncrypted = 0;
+	print("Do you want to see encrypted message ? (Y/n) ");
+	std::cin >> seeEncrypted;
+	if (areTheSame(seeEncrypted, 'Y') || areTheSame(seeEncrypted, 'y')) {
+		printNextLine();
+		showEncryptedMessage(encrypted);
+	}
+	printNextLine();
+	char saveEncrypted = 0;
+	print("Do you want to save encrypted message ? (Y/n) ");
+	std::cin >> saveEncrypted;
+	if (areTheSame(saveEncrypted, 'Y') || areTheSame(saveEncrypted, 'y')) {
+		printNextLine();
+		saveInfoToFile(encrypted);
+	}
+	printNextLine();
+	delete message;
+	delete encrypted;
+	delete cipher;
 }
 
 void Application::manageDecryption() {
