@@ -44,6 +44,7 @@ bool areTheSame(double, double);
 bool areTheSame(std::string &, std::string &);
 bool areTheSame(char *, char *);
 bool areTheSame(std::string *, std::string *);
+bool areTheSame(std::string *, std::string);
 
 
 bool isWithInTheRange(char, char, char);
