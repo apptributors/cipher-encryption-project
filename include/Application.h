@@ -13,19 +13,22 @@
 #include "XorCipherEncryption.h"
 #include "VigenereCipherEncryption.h"
 #include "StreamCipherEncryption.h"
+#include "Utils.h"
 
 class Application
 {
-	int encryptOrDecrypt();
-	int getEncryptionId();
-	int getDecryptionId(std::string &);
-	std::string & getMessage();
-	std::string & processEncrypt(std::string &);
-	std::string & processDecrypt(std::string &);
-	void showMessage(int, std::string &);
-	void saveToFile(std::string &);
+	void showMainMenu();
+	int getMainMenuChoice();
+	void showEncryptionOptions();
+	int getEncryptionChoice();
+	void showInputOptions();
+	int getInputChoice();
+	void manageEncryption();
+	void manageDecryption();
+	void showEndCredits();
+	
 public:
-	void startApp();
+	void runApp();
 };
 
 #endif

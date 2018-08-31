@@ -1,253 +1,110 @@
 #include "Application.h"
 
-int Application::encryptOrDecrypt()
-{
-	std::cout << "Menu:\n";
-	std::cout << "1 - Encryption\n";
-	std::cout << "2 - Decryption\n";
-	std::cout << "3 - Exit\n";
-	int choice;
-	std::cout << "Enter your choice : ";
+int Application::getEncryptionChoice() {
+	int choice = 0;
+	print("Which cipher do you want now ? ");
 	std::cin >> choice;
-	return (choice > 3 || choice < 1) ? -1 : choice;
+	if (isWithInTheRange(choice, 1, 7)) {
+		return choice;
+	}
+	return 0;
 }
 
-std::string &Application::getMessage()
-{
-	FileHandler *file;
-	int type;
-	std::string *message = new std::string();
-	std::cout << "Data input type:\n";
-	std::cout << "1 - Console input\n";
-	std::cout << "2 - File input\n";
-	std::cout << "Enter your choice: ";
-	std::cin >> type;
-	if (type == 2)
-	{
-		file = new FileHandler;
-		std::string filedir;
-		std::cout << "\nEnter file directory : ";
-		std::cin >> filedir;
-		std::string *content = file->readFromFile(filedir);
-		delete file;
-		return *content;
+int Application::getMainMenuChoice() {
+	int choice = 0;
+	print("What are you about to do ? ");
+	std::cin >> choice;
+	if (isWithInTheRange(choice, 1, 3)) {
+		return choice;
 	}
-	else if (type == 1)
-	{
-		std::cout << "NOTE : End your message with ~ (tilde) symbol.\n";
-		std::cout << "Enter your message:\n";
-		getline(std::cin, *message, '~');
-	}
-
-	if (*message == "")
-		*message = "NULL";
-	return *message;
+	return 0;
 }
 
-int Application::getEncryptionId()
-{
-	int type;
-	std::cout << "Types of Cipher Encryption:\n";
-	std::cout << "1 - Bitwise" << std::endl;
-	std::cout << "2 - Block" << std::endl;
-	std::cout << "3 - Caesar" << std::endl;
-	std::cout << "4 - Transpose" << std::endl;
-	std::cout << "5 - Xor (Exclusive or)" << std::endl;
-	std::cout << "6 - Vigenere " << std::endl;
-	std::cout << "7 - Stream" << std::endl;
-	std::cout << "Enter type : ";
-	std::cin >> type;
-	return (type < 1 || type > 7) ? -1 : type;
+int Application::getInputChoice() {
+	int choice = 0;
+	print("How can I get the input ? ");
+	std::cin >> choice;
+	if (isWithInTheRange(choice, 1, 2)) {
+		return choice;
+	}
+	return 0;
 }
 
-void Application::showMessage(int type, std::string &message)
-{
-	if (message != "NULL")
-	{
-		if (type == 2)
-			std::cout << "Decrypted Version:";
-		else
-			std::cout << "Encrypted Version:\n";
-		std::cout << message;
-	}
-	else
-	{
-		std::cout << "Invalid input..\n";
+void Application::showEncryptionOptions() {
+	println("Types of ciphers available : ");
+	println("1 > Bitwise");
+	println("2 > Block");
+	println("3 > Caesar");
+	println("4 > Stream");
+	println("5 > Transpose");
+	println("6 > Vigenere");
+	println("7 > Xor (Exclusive OR)");
+}
+
+void Application::showMainMenu() {
+	println("What to do now ?");
+	println("1 > Encryption");
+	println("2 > Decryption");
+	println("3 > Exit");
+}
+
+void Application::showInputOptions() {
+	println("How are you going to enter the information ?");
+	println("1 > Type it now");
+	println("2 > Retrieve it from a existing file");
+}
+
+void Application::manageEncryption() {
+	showEncryptionOptions();
+	int encryptionChoice = getEncryptionChoice();
+	while (encryptionChoice == 0) {
+		printNextLine();
+		println("Try to choose an available cipher option.");
+		printNextLine();
+		showEncryptionOptions();
+		encryptionChoice = getEncryptionChoice();
 	}
 }
 
-void Application::saveToFile(std::string &message)
-{
-	std::cin.ignore();
-	FileHandler *file = new FileHandler;
-	std::string filedir;
-	std::cout << "\nEnter file directory: ";
-	getline(std::cin, filedir, '\n');
-	file->writeToFile(filedir, &message);
-	std::cout << "\nFile saved.";
-	delete file;
+void Application::manageDecryption() {
+	// TODO: Implement this method
+	println("Yet to be implemented!!!");
 }
 
-std::string &Application::processEncrypt(std::string &message)
-{
-	CipherEncryption *ce;
-	std::string *m = new std::string();
-	std::string key = "Keepass";
-	switch (getEncryptionId())
-	{
-	case 1:
-		ce = new BitwiseCipherEncryption;
-		break;
-	case 2:
-		ce = new BlockCipherEncryption(key);
-		break;
-	case 3:
-		ce = new CaesarCipherEncryption;
-		break;
-	case 4:
-		ce = new StreamCipherEncryption;
-		break;
-	case 5:
-		ce = new TransposeCipherEncryption;
-		break;
-	case 6:
-		ce = new VigenereCipherEncryption;
-		break;
-	case 7:
-		ce = new XorCipherEncryption(message[0]);
-		break;
-	default:
-		std::cout << "\n Wrong cipher type...\n";
-		*m = "NULL";
-		break;
-	}
-	if (*m != "NULL")
-	{
-		m = ce->encrypt(message);
-		delete ce;
-	}
-	return *m;
+void Application::showEndCredits() {
+	clearScreen();
+	std::string title = "Project done by the following students of XII - A :";
+	std::string decoration(title.size(), '~');
+	printHeading(title, decoration);
+	printLines(3);
+	printcnt("Abhishek Sriram, Roll No : 2");
+	printcnt("Ashwin Kumar M, Roll No : 3");
+	printcnt("Prajeen R G, Roll No : 20");
+	printcnt("Vishal B, Roll No : 40");
+	printLines(3);
 }
 
-std::string &Application::processDecrypt(std::string &message)
-{
-	CipherEncryption *ce;
-	std::string *m = new std::string();
-	std::string key = "Keepass";
-	std::string enc = message.substr(0, message.size() - 3);
-	switch (getDecryptionId(message))
-	{
-	case 1:
-		ce = new BitwiseCipherEncryption;
-		break;
-	case 2:
-		ce = new BlockCipherEncryption(key);
-		break;
-	case 3:
-		ce = new CaesarCipherEncryption;
-		break;
-	case 4:
-		ce = new StreamCipherEncryption;
-		break;
-	case 5:
-		ce = new TransposeCipherEncryption;
-		break;
-	case 6:
-		ce = new VigenereCipherEncryption;
-		break;
-	case 7:
-		ce = new XorCipherEncryption(message[0]);
-		break;
-	default:
-		*m = "NULL";
-		std::cout << "\n Inputed Cipher is not compatible.. \n";
-		return *m;
+void Application::runApp() {
+	showMainMenu();
+	int menuChoice = getMainMenuChoice();
+	while (menuChoice == 0) {
+		printNextLine();
+		println("Try to follow the given instructions.");
+		printNextLine();
+		showMainMenu();
+		menuChoice = getMainMenuChoice();
 	}
-	m = ce->decrypt(enc);
-	return *m;
-}
-
-int Application::getDecryptionId(std::string &message)
-{
-	std::string type = message.substr(message.size() - 3, 3);
-	if (type.compare(std::string("0x0")))
-	{
-		return 1;
+	printNextLine();
+	switch (menuChoice) {
+		case 1:
+			manageEncryption();
+			break;
+		case 2:
+			manageDecryption();
+			break;
+		default:
+			showEndCredits();
+			return;
 	}
-	else if (type.compare(std::string("1x1")))
-	{
-		return 2;
-	}
-	else if (type.compare(std::string("2x2")))
-	{
-		return 3;
-	}
-	else if (type.compare(std::string("3x3")))
-	{
-		return 4;
-	}
-	else if (type.compare(std::string("4x4")))
-	{
-		return 5;
-	}
-	else if (type.compare(std::string("5x5")))
-	{
-		return 6;
-	}
-	else if (type.compare(std::string("6x6")))
-	{
-		return 7;
-	}
-	else
-	{
-		return -1;
-	}
-}
-
-void Application::startApp()
-{
-	int type = encryptOrDecrypt();
-	std::cout << std::endl;
-	if (type == 3)
-	{
-		exit(0);
-	}
-	std::string message = getMessage();
-	std::string processed;
-	std::cout << std::endl;
-	if (message == "NULL")
-	{
-		std::cout << "Invalid input...";
-	}
-	else
-	{
-		if (type == 1)
-		{
-			processed = processEncrypt(message);
-		}
-		else if (type == 2)
-		{
-			processed = processDecrypt(message);
-		}
-		else
-		{
-			std::cout << "Choice not found.";
-		}
-
-		showMessage(type, processed);
-		char ch;
-		std::cout << std::endl;
-		std::cout << "\nDo you want to save ";
-		if (type == 1)
-		{
-			std::cout << "encrypted data ? ";
-		}
-		else
-		{
-			std::cout << "decrypted data ? ";
-		}
-		std::cin >> ch;
-		if (ch == 'y' || ch == 'Y')
-			saveToFile(processed);
-	}
+	showEndCredits();
 }

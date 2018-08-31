@@ -73,31 +73,31 @@ void println(const std::string *content)
 void printcnt(char content)
 {
     int length = 1;
-    int position = static_cast<int>((80 - length) / 2);
+    int position = static_cast<int>((SCREEN_WIDTH - length) / 2);
     std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
 void printcnt(int content)
 {
-    int length = std::to_string(content).size();
-    int position = static_cast<int>((80 - length) / 2);
+    int length = toString(content).size();
+    int position = static_cast<int>((SCREEN_WIDTH - length) / 2);
     std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
 void printcnt(float content)
 {
-    int length = std::to_string(content).size();
-    int position = static_cast<int>((80 - length) / 2);
+    int length = toString(content).size();
+    int position = static_cast<int>((SCREEN_WIDTH - length) / 2);
     std::cout << std::string(position - 1, ' ');
     println(content);
 }
 
 void printcnt(double content)
 {
-    int length = std::to_string(content).size();
-    int position = static_cast<int>((80 - length) / 2);
+    int length = toString(content).size();
+    int position = static_cast<int>((SCREEN_WIDTH - length) / 2);
     std::cout << std::string(position - 1, ' ');
     println(content);
 }
@@ -105,7 +105,7 @@ void printcnt(double content)
 void printcnt(std::string &content)
 {
     int length = content.size();
-    int position = static_cast<int>((80 - length) / 2);
+    int position = static_cast<int>((SCREEN_WIDTH - length) / 2);
     std::cout << std::string(position - 1, ' ');
     println(content);
 }
@@ -113,7 +113,7 @@ void printcnt(std::string &content)
 void printcnt(const char *content)
 {
     int length = strlen(content);
-    int position = static_cast<int>((80 - length) / 2);
+    int position = static_cast<int>((SCREEN_WIDTH - length) / 2);
     std::cout << std::string(position - 1, ' ');
     println(content);
 }
@@ -121,7 +121,7 @@ void printcnt(const char *content)
 void printcnt(const std::string *content)
 {
     int length = content->size();
-    int position = static_cast<int>((80 - length) / 2);
+    int position = static_cast<int>((SCREEN_WIDTH - length) / 2);
     std::cout << std::string(position - 1, ' ');
     println(content);
 }
@@ -159,4 +159,57 @@ bool areTheSame(char *a, char *b)
 bool areTheSame(std::string *a, std::string *b)
 {
     return *a == *b;
+}
+
+bool isWithInTheRange(char value, char lowerLimit, char upperLimit)
+{
+    return value >= lowerLimit && value <= upperLimit;
+}
+
+bool isWithInTheRange(int value, int lowerLimit, int upperLimit)
+{
+    return value >= lowerLimit && value <= upperLimit;
+}
+
+bool isWithInTheRange(float value, float lowerLimit, float upperLimit)
+{
+    return value >= lowerLimit && value <= upperLimit;
+}
+
+bool isWithInTheRange(double value, double lowerLimit, double upperLimit)
+{
+    return value >= lowerLimit && value <= upperLimit;
+}
+
+template <typename T>
+std::string toString(T t)
+{
+    std::ostringstream oss;
+    oss << t;
+    return oss.str();
+}
+
+void clearScreen()
+{
+    std::system(CLEAR);
+}
+
+void printHeading(std::string &title, std::string &decoration)
+{
+    printcnt(decoration);
+    printcnt(title);
+    printcnt(decoration);
+}
+
+void printNextLine()
+{
+    std::cout << std::endl;
+}
+
+void printLines(int noOfLines)
+{
+    for (int i = 0; i < noOfLines; i++)
+    {
+        printNextLine();
+    }
 }
