@@ -25,6 +25,7 @@ class Application
 	int getInputChoice();
 	std::string getFileInfo();
 	std::string *getInputInfo();
+	CipherEncryption *getSuitableCipher(int);
 	void manageEncryption();
 	void showEncryptedMessage(std::string *);
 	void manageDecryption();

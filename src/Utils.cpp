@@ -161,6 +161,11 @@ bool areTheSame(std::string *a, std::string *b)
     return *a == *b;
 }
 
+bool areTheSame(std::string *a, std::string b)
+{
+    return *a == b;
+}
+
 bool isWithInTheRange(char value, char lowerLimit, char upperLimit)
 {
     return value >= lowerLimit && value <= upperLimit;
