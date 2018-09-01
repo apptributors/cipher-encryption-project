@@ -1,5 +1,6 @@
 #ifndef UTILS_H
 #define UTILS_H
+#define SCREEN_WIDTH 80
 #include <cstring>
 #include <string>
 #include <iostream>

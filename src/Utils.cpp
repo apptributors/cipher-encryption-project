@@ -1,10 +1,3 @@
-//Constants
-#define SCREEN_WIDTH 80
-#ifdef _WIN32
-#define CLEAR "cls"
-#else //In any other OS
-#define CLEAR "clear"
-#endif
 #include "Utils.h"
 
 void print(const char *content)
@@ -116,7 +109,10 @@ std::string toString(T t)
 
 void clearScreen()
 {
-    std::system(CLEAR);
+    int state = std::system("cls||clear");
+    while (state == -1) {
+        state = std::system("cls||clear");
+    }
 }
 
 void printHeading(std::string &title, std::string &decoration)
