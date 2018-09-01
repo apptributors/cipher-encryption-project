@@ -12,10 +12,10 @@ set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 file(GLOB MY_PROJECT_FILES "src/*.cpp")
 
 if ( CMAKE_COMPILER_IS_GNUCC )
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Werror")
+    add_definitions("-Werror")
 endif()
 if ( MSVC )
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /WX")
+    add_definitions("/WX")
 endif()
 
 if ( WIN32 )
